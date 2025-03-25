@@ -1,39 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# To-Do List (Next.js)
 
-First, run the development server:
+Este es un proyecto para gestionar tareas, desarrollado con **Next.js**. Permite crear, obtener, actualizar y eliminar tareas utilizando un almacenamiento temporal en memoria.
 
+## Instalación y Ejecución
+
+### 1️⃣ Clonar el repositorio
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/tu-usuario/nombre-del-repositorio.git
+cd nombre-del-repositorio
 ```
 
-Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
+### 2️⃣ Instalar dependencias
+El proyecto utiliza `pnpm`, pero también podes usar `npm` o `yarn`.
+```bash
+pnpm install
+# o
+npm install
+# o
+yarn install
+```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 3️⃣ Ejecutar el servidor en modo desarrollo
+```bash
+pnpm dev
+# o
+npm run dev
+# o
+yarn dev
+```
+Esto iniciará el servidor en `http://localhost:3001/`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Endpoints de la API
 
-To learn more about Next.js, take a look at the following resources:
+### Obtener todas las tareas
+**GET** `/api/tasks`
+```bash
+curl -X GET http://localhost:3001/api/tasks
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Crear una nueva tarea
+**POST** `/api/tasks`
+```bash
+curl -X POST http://localhost:3001/api/tasks   -H "Content-Type: application/json"   -d '{"title": "Nueva tarea", "description": "Descripción de la tarea"}'
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Actualizar una tarea
+**PUT** `/api/tasks/:id`
+```bash
+curl -X PUT http://localhost:3001/api/tasks/{taskId}   -H "Content-Type: application/json"   -d '{"title": "Tarea actualizada", "completed": true}'
+```
 
-## Deploy on Vercel
+### Eliminar una tarea
+**DELETE** `/api/tasks/:id`
+```bash
+curl -X DELETE http://localhost:3001/api/tasks/{taskId}
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Estructura del proyecto
+```
+src/
+│── app/
+│   ├── api/
+│   │   ├── tasks/
+│   │   │   ├── route.js   # Endpoints para obtener y crear tareas
+│   │   │   ├── [id]/
+│   │   │   │   ├── route.js  # Endpoints para actualizar y eliminar tareas
+│── lib/
+│   ├── tasks.js  # Lógica para manejar tareas en memoria
+│── package.json
+│── README.md
+```
+
+---
+
+## Consideraciones
+- El proyecto utiliza almacenamiento **en memoria**, lo que significa que los datos se reinician cada vez que el servidor se detiene.
 
 Aplicacion Funcionando
 ![Aplicacion funcionando](image.png)
