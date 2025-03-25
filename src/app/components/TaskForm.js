@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export default function TaskForm({ onCreateTask, onUpdateTask, editingTask }) {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [completed, setCompleted] = useState(false);
 
   useEffect(() => {
     if (editingTask) {
       setTitle(editingTask.title);
-      setDescription(editingTask.description || '');
+      setDescription(editingTask.description || "");
       setCompleted(editingTask.completed || false);
     } else {
-      setTitle('');
-      setDescription('');
+      setTitle("");
+      setDescription("");
       setCompleted(false);
     }
   }, [editingTask]);
@@ -25,7 +25,7 @@ export default function TaskForm({ onCreateTask, onUpdateTask, editingTask }) {
     const taskData = {
       title,
       description,
-      completed
+      completed,
     };
 
     if (editingTask) {
@@ -34,16 +34,18 @@ export default function TaskForm({ onCreateTask, onUpdateTask, editingTask }) {
       onCreateTask(taskData);
     }
 
-    setTitle('');
-    setDescription('');
+    setTitle("");
+    setDescription("");
     setCompleted(false);
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <fieldset>
-        <label htmlFor="title" className="sr-only">Título de la tarea</label>
-        <input 
+        <label htmlFor="title" className="sr-only">
+          Título de la tarea
+        </label>
+        <input
           id="title"
           type="text"
           value={title}
@@ -55,8 +57,10 @@ export default function TaskForm({ onCreateTask, onUpdateTask, editingTask }) {
       </fieldset>
 
       <fieldset>
-        <label htmlFor="description" className="sr-only">Descripción (opcional)</label>
-        <textarea 
+        <label htmlFor="description" className="sr-only">
+          Descripción (opcional)
+        </label>
+        <textarea
           id="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
@@ -67,15 +71,15 @@ export default function TaskForm({ onCreateTask, onUpdateTask, editingTask }) {
       </fieldset>
 
       <fieldset className="flex items-center">
-        <input 
+        <input
           type="checkbox"
           id="completed"
           checked={completed}
           onChange={(e) => setCompleted(e.target.checked)}
           className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-purple-300 rounded"
         />
-        <label 
-          htmlFor="completed" 
+        <label
+          htmlFor="completed"
           className="ml-2 block text-sm text-purple-900"
         >
           Completada
@@ -83,11 +87,11 @@ export default function TaskForm({ onCreateTask, onUpdateTask, editingTask }) {
       </fieldset>
 
       <footer>
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           className="w-full bg-purple-500 text-white py-2 rounded-md hover:bg-purple-600 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
         >
-          {editingTask ? 'Actualizar Tarea' : 'Crear Tarea'}
+          {editingTask ? "Actualizar Tarea" : "Crear Tarea"}
         </button>
       </footer>
     </form>
